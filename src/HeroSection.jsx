@@ -6,7 +6,7 @@ const HeroSection = () => {
   return (
     <div className="min-h-screen text-white bg-gray-900">
       {/* Hero Section */}
-      <div className="relative h-[575px] w-full">
+      <div className="relative h-[570px] mt-19 w-full">
         <div className="absolute inset-1 bg-gradient-to-r from-black/50 via-black/40 to-transparent">
           <img
             src="https://images7.alphacoders.com/121/thumb-1920-1216965.jpg"
@@ -15,7 +15,7 @@ const HeroSection = () => {
           />
         </div>
         <div className="absolute flex flex-col text-justify justify-center px-14 space-y-4">
-          <h1 className="text-7xl font-bold text-white mt-40">Aladdin</h1>
+          <h1 className="text-7xl font-bold text-white mt-25">Aladdin</h1>
           <p className="text-gray-200 text-lg max-w-xl">
             Follow the exciting adventure of Aladdin, <br />a young street thief who
             discovers a magical <br /> lamp and a powerful Genie.

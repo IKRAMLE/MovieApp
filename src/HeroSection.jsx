@@ -2,12 +2,11 @@ import React from "react";
 import { Play, ChevronRight } from "lucide-react";
 import MovieCard from "./MovieCard";
 
-
 const HeroSection = () => {
   return (
     <div className="min-h-screen text-white bg-gray-900">
       {/* Hero Section */}
-      <div className="relative h-[520px] w-full">
+      <div className="relative h-[575px] w-full">
         <div className="absolute inset-1 bg-gradient-to-r from-black/50 via-black/40 to-transparent">
           <img
             src="https://images7.alphacoders.com/121/thumb-1920-1216965.jpg"
@@ -33,7 +32,7 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
-     < MovieCard />
+      <MovieCard />
     </div>
   );
 };

@@ -15,10 +15,11 @@ const HeroSection = () => {
           />
         </div>
         <div className="absolute flex flex-col text-justify justify-center px-14 space-y-4">
-          <h1 className="text-7xl font-bold text-white mt-25">Aladdin</h1>
+          <h1 className="text-7xl font-bold text-white mt-23">Aladdin</h1>
           <p className="text-gray-200 text-lg max-w-xl">
             Follow the exciting adventure of Aladdin, <br />a young street thief who
-            discovers a magical <br /> lamp and a powerful Genie.
+            discove
+            rs a magical <br /> lamp and a powerful Genie.
           </p>
           <div className="flex space-x-4 mt-8">
             <button className="flex items-center space-x-2 bg-white text-black px-6 py-3 rounded-full hover:bg-gray-200 transition-colors">

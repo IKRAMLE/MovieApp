@@ -18,7 +18,7 @@ const MovieCard = () => {
 
   useEffect(() => {
     const fetchMovies = async () => {
-      setLoading(true);
+      setLoading(false);
       try {
         const response = await fetch(`${API_URL}&page=${currentPage}`, API_OPTIONS);
         if (!response.ok) throw new Error("Failed to fetch movies");
@@ -27,7 +27,7 @@ const MovieCard = () => {
       } catch (err) {
         console.error("Error fetching movies:", err);
       } finally {
-        setLoading(false);
+        setCurrentPage((prev) => prev + 1);
       }
     };
     fetchMovies();
@@ -42,12 +42,12 @@ const MovieCard = () => {
   };
 
   return (
-    <div className="p-6 -mt-38 relative">
-      <div className="flex justify-between items-center mb-4">
-        <h3 className="text-2xl font-semibold text-white">Trending Movies</h3>
+    <div className="p-6 relative -mt-35">
+      <div className="flex justify-between items-center ">
+        <h3 className="text-2xl font-semibold text-white mb-5">Trending Movies</h3>
       </div>
 
-      <div className="relative group">
+      <div className="relative group ">
         <button
           onClick={() => scrollContainer("left")}
           className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-black/50 p-2 rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity"
@@ -99,6 +99,7 @@ const MovieCard = () => {
         >
           <ChevronRight size={24} />
         </button>
+        
       </div>
 
       <style jsx>{`

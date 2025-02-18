@@ -12,26 +12,24 @@ const API_OPTIONS = {
 
 const MovieCard = () => {
   const [movies, setMovies] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [selectedMovie, setSelectedMovie] = useState(null);
 
   useEffect(() => {
     const fetchMovies = async () => {
-      setLoading(false);
       try {
-        const response = await fetch(`${API_URL}&page=${currentPage}`, API_OPTIONS);
+        const response = await fetch(API_URL, API_OPTIONS);
         if (!response.ok) throw new Error("Failed to fetch movies");
         const data = await response.json();
         setMovies(data.results || []);
       } catch (err) {
         console.error("Error fetching movies:", err);
       } finally {
-        setCurrentPage((prev) => prev + 1);
+        setLoading(false);
       }
     };
     fetchMovies();
-  }, [currentPage]);
+  }, []);
 
   const scrollContainer = (direction) => {
     const container = document.getElementById("movies-container");
@@ -42,12 +40,12 @@ const MovieCard = () => {
   };
 
   return (
-    <div className="p-6 relative -mt-35">
-      <div className="flex justify-between items-center ">
+    <div className="p-6 relative -mt-37">
+      <div className="flex justify-between items-center">
         <h3 className="text-2xl font-semibold text-white mb-5">Trending Movies</h3>
       </div>
 
-      <div className="relative group ">
+      <div className="relative group">
         <button
           onClick={() => scrollContainer("left")}
           className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-black/50 p-2 rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity"
@@ -71,7 +69,7 @@ const MovieCard = () => {
                 <img
                   src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                   alt={movie.title}
-                  className="w-47 h-72 object-cover rounded-lg shadow-md hover:shadow-lg transition-all duration-300 ease-in-out"
+                  className="w-48 h-72 object-cover rounded-lg shadow-md hover:shadow-lg transition-all duration-300 ease-in-out"
                 />
                 {selectedMovie?.id === movie.id && (
                   <div className="absolute inset-0 bg-black/80 rounded-lg p-4 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-between">
@@ -99,7 +97,6 @@ const MovieCard = () => {
         >
           <ChevronRight size={24} />
         </button>
-        
       </div>
 
       <style jsx>{`

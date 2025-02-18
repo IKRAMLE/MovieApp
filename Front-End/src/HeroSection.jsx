@@ -13,7 +13,8 @@ const HeroSection = () => {
             alt="Aladdin"
             className="w-full h-full object-cover mix-blend-overlay"
           />
-        </div>
+        </div
+        >
         <div className="absolute flex flex-col text-justify justify-center px-14 space-y-4">
           <h1 className="text-7xl font-bold text-white mt-23">Aladdin</h1>
           <p className="text-gray-200 text-lg max-w-xl">

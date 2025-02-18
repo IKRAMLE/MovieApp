@@ -20,6 +20,7 @@ import Hafsa from "/2nd.png";
 import Salma from "/3rd.png";
 import Xa from "/4th.png";
 import HeroSection from "./HeroSection.jsx";
+import Add from "./MoviesAdd.jsx";
 
 // API Configuration
 const API_URL =
@@ -67,7 +68,13 @@ const FollowingItem = ({ name, image }) => (
   </div>
 );
 
-const MovieGrid = ({ movies, loading }) => (
+const MovieGrid = ({
+  movies,
+  loading,
+  currentPage,
+  handlePrevPage,
+  handleNextPage,
+}) => (
   <div>
     <h3 className="text-2xl font-semibold text-white px-6">Movies</h3>
     <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6 p-6">
@@ -107,6 +114,27 @@ const MovieGrid = ({ movies, loading }) => (
           </div>
         ))
       )}
+      <Add />
+    </div>
+    <div className="flex items-center justify-center space-x-4 pb-6">
+      <button
+        onClick={handlePrevPage}
+        disabled={currentPage === 1}
+        className={`px-4 py-2 rounded-full ${
+          currentPage === 1
+            ? "bg-gray-700 text-gray-500 cursor-not-allowed"
+            : "bg-blue-600 text-white hover:bg-blue-700"
+        }`}
+      >
+        Previous
+      </button>
+      <span className="text-white">Page {currentPage}</span>
+      <button
+        onClick={handleNextPage}
+        className="px-4 py-2 rounded-full bg-blue-600 text-white hover:bg-blue-700"
+      >
+        Next
+      </button>
     </div>
   </div>
 );
@@ -117,6 +145,7 @@ const Header = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
 
   const menuItems = [
     { icon: Compass, text: "Browser" },
@@ -134,13 +163,21 @@ const Header = () => {
     { name: "Xa.na26", image: Xa },
   ];
 
+  const handleNextPage = () => {
+    setCurrentPage((prev) => prev + 1);
+  };
+
+  const handlePrevPage = () => {
+    setCurrentPage((prev) => Math.max(1, prev - 1));
+  };
+
   useEffect(() => {
     const fetchMovies = async () => {
       setLoading(true);
       try {
         const url = searchQuery
-          ? `https://api.themoviedb.org/3/search/movie?query=${searchQuery}&include_adult=false`
-          : API_URL;
+          ? `https://api.themoviedb.org/3/search/movie?query=${searchQuery}&include_adult=false&page=${currentPage}`
+          : `${API_URL}&page=${currentPage}`;
         const response = await fetch(url, API_OPTIONS);
         const data = await response.json();
         setMovies(data.results);
@@ -153,7 +190,7 @@ const Header = () => {
 
     const debounceTimer = setTimeout(fetchMovies, 500);
     return () => clearTimeout(debounceTimer);
-  }, [searchQuery]);
+  }, [searchQuery, currentPage]);
 
   const handleMenuClick = (text) => {
     setActiveMenuItem(text);
@@ -259,6 +296,7 @@ const Header = () => {
                 <LogOut size={20} />
                 <span>Log Out</span>
               </button>
+              <div className="text-sm">&copy; 2025 CineVibe</div>
             </div>
           </div>
         </div>
@@ -270,7 +308,13 @@ const Header = () => {
           }`}
         >
           <HeroSection />
-          <MovieGrid movies={movies} loading={loading} />
+          <MovieGrid
+            movies={movies}
+            loading={loading}
+            currentPage={currentPage}
+            handlePrevPage={handlePrevPage}
+            handleNextPage={handleNextPage}
+          />
         </div>
       </div>
     </div>

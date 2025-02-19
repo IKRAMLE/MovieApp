@@ -115,6 +115,7 @@ const MovieGrid = ({
         ))
       )}
     </div>
+    <h3 className="p-6 -mt-3 text-2xl font-semibold text-white">Add a New movie</h3>
     <Add />
     <div className="flex items-center justify-center space-x-4 pb-6">
       <button

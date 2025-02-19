@@ -42,7 +42,7 @@ const MoviesAdd = () => {
   };
 
   return (
-    <div className="p-7">
+    <div className="p-6 -mt-4">
       <div className="flex flex-row flex-wrap gap-6">
         {/* Movie Cards */}
         {movies.map((movie) => (

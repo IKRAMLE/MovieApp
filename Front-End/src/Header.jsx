@@ -114,8 +114,8 @@ const MovieGrid = ({
           </div>
         ))
       )}
-      <Add />
     </div>
+    <Add />
     <div className="flex items-center justify-center space-x-4 pb-6">
       <button
         onClick={handlePrevPage}
